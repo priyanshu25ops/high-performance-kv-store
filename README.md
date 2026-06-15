@@ -150,3 +150,4 @@ ok  	high-performance-kv-store/internal/store	3.412s
 - [ ] **Raft Integration:** Add a strongly-consistent group option for metadata and configuration keys.
 - [ ] **LSM-Tree Engine:** Replace the fully in-memory sharded storage with a disk-backed LSM (Log-Structured Merge) tree for cold data.
 - [ ] **Adaptive Gossip:** Dynamically adjust gossip intervals based on network conditions and packet loss.
+-AYUSH PATHAK
