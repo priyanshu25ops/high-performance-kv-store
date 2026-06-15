@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distributed KV Store Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-area">
+                <div class="logo-icon"></div>
+                <h1>Antigravity KV</h1>
+                <span class="version-badge">v1.0.0</span>
+            </div>
+            <div class="status-summary">
+                <div class="status-item">
+                    <span class="status-label">Node ID</span>
+                    <span class="status-value" id="node-id">-</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Role</span>
+                    <span class="status-value highlight" id="node-role">-</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Uptime</span>
+                    <span class="status-value" id="uptime">-</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Store Size</span>
+                    <span class="status-value" id="store-size">0 keys</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Layout -->
+        <main class="dashboard-grid">
+            <!-- Topology Panel -->
+            <section class="panel topology-panel">
+                <div class="panel-header">
+                    <h2>Cluster Topology</h2>
+                    <span class="live-indicator"><span class="pulse"></span>LIVE</span>
+                </div>
+                <div class="topology-container">
+                    <svg id="topology-svg" width="100%" height="100%" viewBox="0 0 500 400">
+                        <defs>
+                            <radialGradient id="glow-alive" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#10B981" stop-opacity="0.3" />
+                                <stop offset="100%" stop-color="#10B981" stop-opacity="0" />
+                            </radialGradient>
+                            <radialGradient id="glow-suspect" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.3" />
+                                <stop offset="100%" stop-color="#F59E0B" stop-opacity="0" />
+                            </radialGradient>
+                            <radialGradient id="glow-dead" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#EF4444" stop-opacity="0.3" />
+                                <stop offset="100%" stop-color="#EF4444" stop-opacity="0" />
+                            </radialGradient>
+                        </defs>
+                        <!-- Connection Lines Group -->
+                        <g id="connections-group"></g>
+                        <!-- Nodes Group -->
+                        <g id="nodes-group"></g>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- Peer List Panel -->
+            <section class="panel peers-panel">
+                <div class="panel-header">
+                    <h2>Peer Directory</h2>
+                </div>
+                <div class="table-container">
+                    <table class="peers-table">
+                        <thead>
+                            <tr>
+                                <th>Node ID</th>
+                                <th>Address</th>
+                                <th>State</th>
+                                <th>RTT</th>
+                                <th>Replication Lag</th>
+                                <th>Last Seen</th>
+                            </tr>
+                        </thead>
+                        <tbody id="peers-list">
+                            <tr>
+                                <td colspan="6" class="empty-state">No peers detected...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Charts Panel -->
+            <section class="panel charts-panel">
+                <div class="panel-header">
+                    <h2>Performance Metrics</h2>
+                </div>
+                <div class="charts-container">
+                    <div class="chart-wrapper">
+                        <h3>Throughput (ops/sec)</h3>
+                        <canvas id="throughput-chart"></canvas>
+                    </div>
+                    <div class="chart-wrapper">
+                        <h3>Latency Percentiles (ms)</h3>
+                        <div class="percentile-legend">
+                            <span class="legend-item"><span class="dot p50"></span>p50</span>
+                            <span class="legend-item"><span class="dot p95"></span>p95</span>
+                            <span class="legend-item"><span class="dot p99"></span>p99</span>
+                        </div>
+                        <canvas id="latency-chart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
