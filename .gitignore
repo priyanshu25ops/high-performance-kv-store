@@ -1,0 +1,33 @@
+# Binaries
+/bin/
+/dist/
+high-performance-kv-store
+server
+*.exe
+*.test
+*.prof
+
+# Dependency directories
+/vendor/
+
+# WAL and Data Files
+*.log
+*.wal
+*.bin
+data/
+node1_data/
+node2_data/
+node3_data/
+
+# IDEs
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+.DS_Store
+Thumbs.db
